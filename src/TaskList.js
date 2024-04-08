@@ -7,7 +7,7 @@ const TaskList = ({ tasks, onEdit, onDelete, filterOption }) => {
       return true; // Show all tasks
     } else if (filterOption === "completed") {
       return task.completed; // Show only completed tasks
-    } else if (filterOption === "active") {
+    } else if (filterOption === "ongoing") {
       return !task.completed; // Show only active tasks
     }
     return true;

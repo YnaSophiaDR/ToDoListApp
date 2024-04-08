@@ -39,13 +39,23 @@ const Task = ({ task, onEdit, onDelete }) => {
       ) : (
         <span className="task-description">{task.description}</span>
       )}
-      <button
-        onClick={isEditing ? handleEdit : handleToggleComplete} // Toggle between editing and completing
-        className="edit-button"
-      >
-        {isEditing ? "Save" : "Complete"}
+      {isEditing ? (
+        <button className="button save-button" onClick={handleEdit}>
+          Save
+        </button>
+      ) : (
+        <button className="button modify-button" onClick={() => setIsEditing(true)}>
+          Edit
+        </button>
+      )}
+      <button className="button" onClick={handleDelete}>
+        Delete
       </button>
-      <button onClick={handleDelete}>Delete</button>
+      {!isEditing && (
+        <button className="button complete-button" onClick={handleToggleComplete}>
+          {task.completed ? "Undo" : "Complete"}
+        </button>
+      )}
     </li>
   );
 };

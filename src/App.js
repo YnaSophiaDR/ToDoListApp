@@ -36,12 +36,23 @@ function App() {
     setFilterOption(selectedOption);
   };
 
+  const calculateCompletionPercentage = () => {
+    const completedTasks = tasks.filter((task) => task.completed).length;
+    const totalTasks = tasks.length;
+    return totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+  };
+
   return (
     <div className="container">
       <Header />
       <Title />
-      <AddTask addTask={handleAddTask} />
-      <DropdownMenu onFilterChange={handleFilterChange} />
+      <div className="add-task-container">
+        <div className="input"> 
+          <DropdownMenu onFilterChange={handleFilterChange} />
+          <AddTask addTask={handleAddTask} />
+        </div>
+      </div>
+      <h3>{calculateCompletionPercentage()}% Completed</h3>
       <TaskList
         tasks={tasks}
         onEdit={handleEditTask}

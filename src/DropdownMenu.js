@@ -6,9 +6,9 @@ const DropdownMenu = ({ onFilterChange }) => {
   };
 
   return (
-    <select onChange={handleChange}>
+    <select onChange={handleChange} className="drop">
       <option value="all">All</option>
-      <option value="active">Active</option>
+      <option value="ongoing">Ongoing</option>
       <option value="completed">Completed</option>
     </select>
   );
