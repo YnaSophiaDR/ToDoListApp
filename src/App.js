@@ -24,7 +24,7 @@ function App() {
     const updatedTasks = tasks.map((task) =>
       task.id === id
         ? { ...task, description: updatedTask, completed: isCompleted }
-        : task
+        : task,
     );
     setTasks(updatedTasks);
   };
@@ -78,17 +78,24 @@ function App() {
     <div className="container">
       <Header />
       <Title />
+
+      <div className="input">
+        <DropdownMenu onFilterChange={handleFilterChange} />
+        <AddTask addTask={handleAddTask} />
+      </div>
       <div className="add-task-container">
-        <div className="input"> 
-          <DropdownMenu onFilterChange={handleFilterChange} />
-          <AddTask addTask={handleAddTask} />
-          <button className="action-button" onClick={sortTasksByPriority}>Sort Quantity</button>
-          <button className="action-button" onClick={sortTasksAlphabetically}>Sort Alphabetically</button>
-          <button className="action-button" onClick={clearAllTasks}>Clear All</button>
-        </div>
+        <button className="action-button" onClick={sortTasksByPriority}>
+          Sort Quantity
+        </button>
+        <button className="action-button" onClick={sortTasksAlphabetically}>
+          Sort Alphabetically
+        </button>
+        <button className="action-button" onClick={clearAllTasks}>
+          Clear All
+        </button>
       </div>
 
-      <h3>{tasks.length} items in list</h3>
+      <h3>you have {tasks.length} items in list</h3>
       <h3>{calculateCompletionPercentage()}% Completed</h3>
       <TaskList
         tasks={tasks}

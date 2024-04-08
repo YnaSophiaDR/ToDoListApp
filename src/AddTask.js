@@ -12,7 +12,7 @@ const AddTask = ({ addTask }) => {
       setTask("");
     }
   };
-  
+
   const handlePriorityChange = (e) => {
     setPriority(parseInt(e.target.value)); // Parse selected value to integer
   };
@@ -33,7 +33,9 @@ const AddTask = ({ addTask }) => {
           </option>
         ))}
       </select>
-      <button type="submit">Add</button>
+      <button className="button" type="submit">
+        Add
+      </button>
     </form>
   );
 };
