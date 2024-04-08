@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const Task = ({ task, onEdit, onDelete }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [editedTask, setEditedTask] = useState(task.description);
+  const [editedTask, setEditedTask] = useState(task.taskName);
 
   const handleEdit = () => {
     if (editedTask.trim()) {
@@ -37,7 +37,7 @@ const Task = ({ task, onEdit, onDelete }) => {
           autoFocus
         />
       ) : (
-        <span className="task-description">{task.description}</span>
+        <span className="task-description">{task.taskName}</span>
       )}
       {isEditing ? (
         <button className="button save-button" onClick={handleEdit}>

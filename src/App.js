@@ -9,13 +9,13 @@ import "./App.css";
 function App() {
   const [tasks, setTasks] = useState([]);
   const [filterOption, setFilterOption] = useState("all");
-  const [isAscending, setIsAscending] = useState(true); // State to track sorting order for priority
+  const [isAscending, setIsAscending] = useState(true); // State to track sorting order for quantity
   const [isAlphabetical, setIsAlphabetical] = useState(true); // State to track sorting order for alphabetical order
 
   const handleAddTask = (newTask) => {
     const newTaskList = [
       ...tasks,
-      { id: Date.now(), description: newTask, completed: false },
+      { id: Date.now(), taskName: newTask, completed: false },
     ];
     setTasks(newTaskList);
   };
@@ -23,7 +23,7 @@ function App() {
   const handleEditTask = (id, updatedTask, isCompleted) => {
     const updatedTasks = tasks.map((task) =>
       task.id === id
-        ? { ...task, description: updatedTask, completed: isCompleted }
+        ? { ...task, taskName: updatedTask, completed: isCompleted }
         : task,
     );
     setTasks(updatedTasks);
@@ -44,32 +44,32 @@ function App() {
     return totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
   };
 
-  const sortTasksByPriority = () => {
+  const sortTasksByQuantity = () => {
     const sortedTasks = [...tasks].sort((a, b) => {
-      const priorityA = parseInt(a.description.split(" ")[0]);
-      const priorityB = parseInt(b.description.split(" ")[0]);
+      const quantityA = parseInt(a.taskName.split(" ")[0]);
+      const quantityB = parseInt(b.taskName.split(" ")[0]);
       if (isAscending) {
-        return priorityA - priorityB;
+        return quantityA - quantityB;
       } else {
-        return priorityB - priorityA;
+        return quantityB - quantityA;
       }
     });
     setTasks(sortedTasks);
-    setIsAscending(!isAscending); // Toggle sorting order for priority
+    setIsAscending(!isAscending); // Toggle sorting order for quantity
   };
-
+  
   const sortTasksAlphabetically = () => {
     const sortedTasks = [...tasks].sort((a, b) => {
       if (isAlphabetical) {
-        return a.description.localeCompare(b.description);
+        return a.taskName.localeCompare(b.taskName);
       } else {
-        return b.description.localeCompare(a.description);
+        return b.taskName.localeCompare(a.taskName);
       }
     });
     setTasks(sortedTasks);
     setIsAlphabetical(!isAlphabetical); // Toggle sorting order for alphabetical order
   };
-
+  
   const clearAllTasks = () => {
     setTasks([]);
   };
@@ -84,7 +84,7 @@ function App() {
         <AddTask addTask={handleAddTask} />
       </div>
       <div className="add-task-container">
-        <button className="action-button" onClick={sortTasksByPriority}>
+        <button className="action-button" onClick={sortTasksByQuantity}>
           Sort Quantity
         </button>
         <button className="action-button" onClick={sortTasksAlphabetically}>

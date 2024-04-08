@@ -2,19 +2,19 @@ import React, { useState } from "react";
 
 const AddTask = ({ addTask }) => {
   const [task, setTask] = useState("");
-  const [priority, setPriority] = useState(1); // Initial priority set to 1
+  const [quantity, setQuantity] = useState(1); // Initial quantity set to 1
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (task.trim()) {
-      const newTaskDescription = `${priority} ${task}`; // Concatenate priority with task description
+      const newTaskDescription = `${quantity} ${task}`; // Concatenate quantity with task description
       addTask(newTaskDescription); // Pass the concatenated task description
       setTask("");
     }
   };
 
-  const handlePriorityChange = (e) => {
-    setPriority(parseInt(e.target.value)); // Parse selected value to integer
+  const handleQuantityChange = (e) => {
+    setQuantity(parseInt(e.target.value)); // Parse selected value to integer
   };
 
   return (
@@ -25,7 +25,7 @@ const AddTask = ({ addTask }) => {
         onChange={(e) => setTask(e.target.value)}
         placeholder="Add a new task"
       />
-      <select value={priority} onChange={handlePriorityChange}>
+      <select value={quantity} onChange={handleQuantityChange}>
         {/* Generate options from 1 to 100 */}
         {Array.from({ length: 100 }, (_, i) => (
           <option key={i + 1} value={i + 1}>
