@@ -1,7 +1,7 @@
 import React from "react";
 import Task from "./Task";
 
-const TaskList = ({ tasks, onEdit, onDelete, filterOption }) => {
+const TaskList = ({ tasks, onEdit, onDelete, filterOption, onClearAll }) => {
   const filteredTasks = tasks.filter((task) => {
     if (filterOption === "all") {
       return true; // Show all tasks
@@ -14,11 +14,13 @@ const TaskList = ({ tasks, onEdit, onDelete, filterOption }) => {
   });
 
   return (
-    <ul>
-      {filteredTasks.map((task) => (
-        <Task key={task.id} task={task} onEdit={onEdit} onDelete={onDelete} />
-      ))}
-    </ul>
+    <div>
+      <ul>
+        {filteredTasks.map((task) => (
+          <Task key={task.id} task={task} onEdit={onEdit} onDelete={onDelete} />
+        ))}
+      </ul>
+    </div>
   );
 };
 

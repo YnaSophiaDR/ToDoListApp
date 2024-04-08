@@ -156,3 +156,7 @@ button[type="submit"]:hover {
 h3{
   font-family: 'Courier New', Courier, monospace;
 }
+.action-button {
+  height: 44px; /* Adjust the height as desired */
+  /* Add other styles as needed */
+}

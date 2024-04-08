@@ -9,6 +9,8 @@ import "./App.css";
 function App() {
   const [tasks, setTasks] = useState([]);
   const [filterOption, setFilterOption] = useState("all");
+  const [isAscending, setIsAscending] = useState(true); // State to track sorting order for priority
+  const [isAlphabetical, setIsAlphabetical] = useState(true); // State to track sorting order for alphabetical order
 
   const handleAddTask = (newTask) => {
     const newTaskList = [
@@ -42,6 +44,36 @@ function App() {
     return totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
   };
 
+  const sortTasksByPriority = () => {
+    const sortedTasks = [...tasks].sort((a, b) => {
+      const priorityA = parseInt(a.description.split(" ")[0]);
+      const priorityB = parseInt(b.description.split(" ")[0]);
+      if (isAscending) {
+        return priorityA - priorityB;
+      } else {
+        return priorityB - priorityA;
+      }
+    });
+    setTasks(sortedTasks);
+    setIsAscending(!isAscending); // Toggle sorting order for priority
+  };
+
+  const sortTasksAlphabetically = () => {
+    const sortedTasks = [...tasks].sort((a, b) => {
+      if (isAlphabetical) {
+        return a.description.localeCompare(b.description);
+      } else {
+        return b.description.localeCompare(a.description);
+      }
+    });
+    setTasks(sortedTasks);
+    setIsAlphabetical(!isAlphabetical); // Toggle sorting order for alphabetical order
+  };
+
+  const clearAllTasks = () => {
+    setTasks([]);
+  };
+
   return (
     <div className="container">
       <Header />
@@ -50,8 +82,13 @@ function App() {
         <div className="input"> 
           <DropdownMenu onFilterChange={handleFilterChange} />
           <AddTask addTask={handleAddTask} />
+          <button className="action-button" onClick={sortTasksByPriority}>Sort Quantity</button>
+          <button className="action-button" onClick={sortTasksAlphabetically}>Sort Alphabetically</button>
+          <button className="action-button" onClick={clearAllTasks}>Clear All</button>
         </div>
       </div>
+
+      <h3>{tasks.length} items in list</h3>
       <h3>{calculateCompletionPercentage()}% Completed</h3>
       <TaskList
         tasks={tasks}
